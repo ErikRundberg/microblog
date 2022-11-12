@@ -6,10 +6,10 @@ WORKDIR /home/microblog
 COPY requirements.txt microblog.py boot.sh ./
 COPY requirements requirements
 
-RUN python -m venv venv
-RUN venv/bin/pip3 install -r requirements.txt
-RUN adduser -D microblog
-RUN chown -R microblog:microblog ./docker run --name microblog -d -p 8000:5000 --rm microblog:1.0.0-prod
+RUN python -m venv venv && \
+    venv/bin/pip3 install -r requirements.txt && \
+    adduser -D microblog && \
+    chown -R microblog:microblog ./docker run --name microblog -d -p 8000:5000 --rm microblog:1.0.0-prod
 
 
 COPY migrations migrations
@@ -17,8 +17,8 @@ COPY app app
 
 ENV FLASK_APP microblog.py
 
-RUN chown -R microblog:microblog app migrations
-RUN chmod +x boot.sh
+RUN chown -R microblog:microblog app migrations && \
+    chmod +x boot.sh
 
 USER microblog
 
