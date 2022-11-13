@@ -1,21 +1,32 @@
 version: "3"
-services:
-    prod:
-        image: erru17/microblog:v1.0.1-prod
-        container_name: microblog-production
-        ports:
-            - "8000:5000"
-        environment:
-          DATABASE_URL: "mysql+pymysql://microblog:${DB_PASSWORD}@dbserver/microblog"
-        depends_on:
-          - db
 
-    db:
+services:
+    mysql:
       image: mysql/mysql-server:5.7
       container_name: dbserver
-      volumes:
-        - ./db:/var/lib/mysql
       environment:
         MYSQL_RANDOM_ROOT_PASSWORD: "yes"
         MYSQL_DATABASE: "microblog"
-        MYSQL_PASSWORD: "${DB_PASSWORD}"
+        MYSQL_USER: "microblog"
+        MYSQL_PASSWORD: "${MYSQL_PASSWORD}"
+      volumes:
+        - ./db:/home/microblog/data
+      restart: "unless-stopped"
+
+    prod:
+      image: erru17/microblog:1.0.1-prod
+      container_name: microblog
+      environment:
+        DATABASE_URL: "mysql+pymysql://microblog:${MYSQL_PASSWORD}@dbserver/microblog"
+      depends_on:
+        - mysql
+      ports:
+        - "8000:5000"
+      restart: "always"
+
+    test:
+      image: erru17/microblog:test
+      container_name: microblog-test
+      volumes:
+        - ./app:/home/microblog/app
+        - ./tests:/home/microblog/tests

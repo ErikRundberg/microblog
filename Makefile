@@ -140,7 +140,14 @@ run-test:
 	@${py} \
 		-m pytest --pylint --pylint-rcfile=.pylintrc $(test)
 
-
+# target: test-docker                   - Runs tests in docker environment
+.PHONY: test-docker
+test-docker:
+ifeq ($(OS), Linux)
+	@docker compose run --rm test
+else
+	@docker-compose run --rm test
+endif
 
 ## target: exec-tests                   - Run all tests in tests/ with coverage.py
 .PHONY: exec-tests
