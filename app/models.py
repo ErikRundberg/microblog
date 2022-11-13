@@ -65,18 +65,30 @@ class User(UserMixin, db.Model):
         return url
 
     def follow(self, user):
+        """
+        Follow another user to add their posts to homepage
+        """
         if not self.is_following(user):
             self.followed.append(user)
 
     def unfollow(self, user):
+        """
+        Unfollow another user to remove their posts from homepage
+        """
         if self.is_following(user):
             self.followed.remove(user)
 
     def is_following(self, user):
+        """
+        Check if user is already following other user
+        """
         return self.followed.filter(
             followers.c.followed_id == user.id).count() > 0
 
     def followed_posts(self):
+        """
+        Returns the posts user is following (including self)
+        """
         followed = Post.query.join(
             followers, (followers.c.followed_id == Post.user_id)).filter(
                 followers.c.follower_id == self.id)
