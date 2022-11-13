@@ -1,0 +1,1 @@
+The `db` folder is a shared volume containing MySQL data used in production.
