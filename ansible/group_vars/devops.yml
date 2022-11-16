@@ -1,0 +1,10 @@
+---
+root_password: $6$o.DzmAsEPvq$89Eh3Eo9THN9uXa/afXctm3zHHWWmQgXhGuFiSD6Kvd4Tk7E16QPYSsu3BMgeYZ9140I5o2PnnFnihr3XaAhJ1
+
+server_user: deploy
+server_user_pass: $6$HnJx4babxxVInJ$oxgBs4rxNjdUO6YumxzLBpY5mWgPh.Tlw6v9YpQp5TwkOF6LjwxSnvnqZHf1tsASNJqEB8WIDoH9cR.3i8Fiu0
+server_user_groups:
+  - sudo
+
+pub_ssh_key_location:
+  - ~/.ssh/id_rsa.pub # Change me, your local ssh key!
