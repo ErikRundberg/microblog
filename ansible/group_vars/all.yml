@@ -5,6 +5,7 @@ resource_group: DIDA-ERRU17-DV1658-H22-LP2 # Change me
 domain_name: rundberg.me # Change me
 
 root_user: azureuser
+server_user: deploy
 
 vmtags:
     StudentId: "erru17" # Change me
@@ -12,3 +13,5 @@ vmtags:
 
 pub_ssh_key_location:
     -   '~/.ssh/id_rsa.pub' # Change me, your local ssh key!
+
+admin_email: erru17@student.bth.se
