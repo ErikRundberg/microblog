@@ -1,0 +1,15 @@
+---
+- name: Start Docker container (Microblog)
+  docker_container:
+    name: microblog
+    image: erru17/microblog:latest
+    state: started
+    restart: true
+    env:
+      DATABASE_URL: "mysql+pymysql://microblog:{{ lookup('env', 'MYSQL_PASSWORD') or 'mYSqLp4SsW0Rd&&' }}@{{ groups['database'][0] }}/microblog"
+    ports:
+      - "8000:5000"
+
+- name: Display database_url
+  debug:
+    msg: "mysql+pymysql://microblog:{{ lookup('env', 'MYSQL_PASSWORD') or 'mYSqLp4SsW0Rd&&' }}@{{ groups['database'][0] }}/microblog"

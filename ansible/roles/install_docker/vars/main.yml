@@ -1,0 +1,14 @@
+---
+transport_packages:
+  - apt-transport-https
+  - ca-certificates
+  - lsb-release
+  - gnupg
+
+docker_packages:
+  - docker
+  - docker.io
+  - docker-compose
+  - docker-registry
+
+ansible_python_interpreter: /usr/bin/python3

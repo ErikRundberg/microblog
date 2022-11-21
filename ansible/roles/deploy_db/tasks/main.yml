@@ -1,0 +1,20 @@
+---
+- name: Start Docker container (MySQL)
+  docker_container:
+    name: dbserver
+    image: mysql/mysql-server:5.7
+    state: started
+    restart: true
+    env:
+      MYSQL_ROOT_PASSWORD: "{{ lookup('env', 'MYSQL_ROOT_PASSWORD') or 'MySqLp4SsW0RD##' }}"
+      MYSQL_DATABASE: "microblog"
+      MYSQL_USER: "microblog"
+      MYSQL_PASSWORD: "{{ lookup('env', 'MYSQL_PASSWORD') or 'mYSqLp4SsW0Rd&&' }}"
+    volumes:
+      - "/home/deploy/db:/var/lib/mysql"
+    ports:
+      - "3306:3306"
+
+- name: Display database_url
+  debug:
+    msg: "mysql+pymysql://microblog:{{ lookup('env', 'MYSQL_PASSWORD') or 'mYSqLp4SsW0Rd&&' }}@{{ groups['database'][0] }}/microblog"
