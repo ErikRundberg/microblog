@@ -37,7 +37,7 @@
     src: nginx.conf
     dest: /etc/nginx/nginx.conf
   notify:
-    - restart-nginx
+    - Restart nginx
 
 - name: Copy load-balancer.conf
   template:
