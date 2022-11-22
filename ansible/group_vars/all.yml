@@ -12,6 +12,6 @@ vmtags:
 
 
 pub_ssh_key_location:
-    -   '~/.ssh/id_rsa.pub' # Change me, your local ssh key!
+    -   '~/.ssh/id_rsa.pub'
 
 admin_email: erru17@student.bth.se

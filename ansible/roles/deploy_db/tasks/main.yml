@@ -6,10 +6,12 @@
     state: started
     restart: true
     env:
-      MYSQL_ROOT_PASSWORD: "{{ lookup('env', 'MYSQL_ROOT_PASSWORD') or 'MySqLp4SsW0RD##' }}"
+      MYSQL_ROOT_PASSWORD: "microblog"
+      # MYSQL_ROOT_PASSWORD: "{{ lookup('env', 'MYSQL_ROOT_PASSWORD') or 'MySqLp4SsW0RD##' }}"
       MYSQL_DATABASE: "microblog"
       MYSQL_USER: "microblog"
-      MYSQL_PASSWORD: "{{ lookup('env', 'MYSQL_PASSWORD') or 'mYSqLp4SsW0Rd&&' }}"
+      # MYSQL_PASSWORD: "{{ lookup('env', 'MYSQL_PASSWORD') or 'mYSqLp4SsW0Rd&&' }}"
+      MYSQL_PASSWORD: "microblog"
     volumes:
       - "/home/deploy/db:/var/lib/mysql"
     ports:

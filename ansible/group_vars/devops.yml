@@ -7,4 +7,6 @@ server_user_groups:
   - sudo
 
 pub_ssh_key_location:
-  - ~/.ssh/id_rsa.pub # Change me, your local ssh key!
+  - ~/.ssh/id_rsa.pub
+
+ansible_python_interpreter: /usr/bin/python3

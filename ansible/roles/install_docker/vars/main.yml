@@ -4,6 +4,7 @@ transport_packages:
   - ca-certificates
   - lsb-release
   - gnupg
+  - gpg
 
 docker_packages:
   - docker
