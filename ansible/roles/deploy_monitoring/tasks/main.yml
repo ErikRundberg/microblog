@@ -87,4 +87,17 @@
     url: http://0.0.0.0:3000
     dashboard_id: 1860
     dashboard_revision: "22"
+    overwrite: true
+    state: present
+
+- name: Copy flask dashboard
+  copy:
+    src: files/flaskdash.json
+    dest: /home/deploy/flaskdash.json
+
+- name: Import flask dashboard - Prometheus Flask exporter
+  grafana_dashboard:
+    url: http://0.0.0.0:3000
+    path: /home/deploy/flaskdash.json
+    overwrite: true
     state: present
