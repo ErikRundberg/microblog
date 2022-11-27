@@ -2,7 +2,7 @@
 - name: Start Docker container (Microblog)
   docker_container:
     name: microblog
-    image: erru17/microblog:latest
+    image: erru17/microblog:flask-exporter
     state: started
     restart: true
     env:

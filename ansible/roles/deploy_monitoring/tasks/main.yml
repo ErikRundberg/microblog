@@ -1,0 +1,90 @@
+---
+- name: Create monitoring network
+  docker_network:
+    name: monitor
+    state: present
+
+- name: Create prometheus volume
+  docker_volume:
+    volume_name: prometheus-data
+    state: present
+
+- name: Create grafana volume
+  docker_volume:
+    volume_name: grafana-data
+    state: present
+
+- name: Template prometheus.yml to server
+  template:
+      src: prometheus.yml.j2
+      dest: /tmp/prometheus.yml
+      force: yes
+
+- name: Start node-exporter
+  docker_container:
+    name: node-exporter
+    image: prom/node-exporter:v1.2.2
+    state: started
+    restart: true
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /:/rootfs:ro
+    networks:
+      - name: monitor
+    ports:
+      - "9100:9100"
+    command:
+      - '--path.procfs=/host/proc'
+      - '--path.rootfs=/rootfs'
+      - '--path.sysfs=/host/sys'
+      - '--collector.filesystem.mount-points-exclude=^/(sys|proc|dev|host|etc)($$|/)'
+
+- name: Start prometheus
+  docker_container:
+    name: prometheus
+    image: prom/prometheus:v2.31.1
+    state: started
+    restart: true
+    volumes:
+      - /tmp/prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus-data:/prometheus
+    networks:
+      - name: monitor
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+      - "--storage.tsdb.path=/prometheus"
+      - "--web.console.libraries=/etc/prometheus/console_libraries"
+      - "--web.console.templates=/etc/prometheus/consoles"
+      - "--storage.tsdb.retention.time=24h"
+      - "--web.enable-lifecycle"
+    ports:
+      - "9090:9090"
+
+- name: Start grafana
+  docker_container:
+    name: grafana
+    image: grafana/grafana:8.2.4
+    state: started
+    restart: true
+    volumes:
+      - grafana-data:/var/lib/grafana
+    networks:
+      - name: monitor
+    ports:
+      - "3000:3000"
+
+- name: Create prometheus datasource
+  grafana_datasource:
+    name: prometheus
+    url: http://0.0.0.0:3000
+    ds_type: prometheus
+    ds_url: http://prometheus:9090
+    state: present
+
+- name: Import grafana dashboard - Node Explorer Full
+  grafana_dashboard:
+    url: http://0.0.0.0:3000
+    dashboard_id: 1860
+    dashboard_revision: "22"
+    state: present

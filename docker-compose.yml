@@ -8,49 +8,81 @@ volumes:
   grafana-data: {}
 
 services:
-  node-exporter:
-    image: prom/node-exporter:v1.2.2
-    container_name: node-exporter
-    restart: unless-stopped
+  mysql:
+    image: mysql/mysql-server:5.7
+    container_name: dbserver
+    environment:
+      MYSQL_RANDOM_ROOT_PASSWORD: "yes"
+      MYSQL_DATABASE: "microblog"
+      MYSQL_USER: "microblog"
+      MYSQL_PASSWORD: "${MYSQL_PASSWORD}"
     volumes:
-      - /proc:/host/proc:ro
-      - /sys:/host/sys:ro
-      - /:/rootfs:ro
-    command:
-      - '--path.procfs=/host/proc'
-      - '--path.rootfs=/rootfs'
-      - '--path.sysfs=/host/sys'
-      - '--collector.filesystem.mount-points-exclude=^/(sys|proc|dev|host|etc)($$|/)'
-    ports:
-      - 9100:9100
-    networks:
-      - monitor
+      - ./db:/home/microblog/data
+    restart: "unless-stopped"
 
-  prometheus:
-    image: prom/prometheus:v2.31.1
-    restart: unless-stopped
-    volumes:
-      - ./prometheus.yml:/etc/prometheus/prometheus.yml
-      - prometheus-data:/prometheus
-    command:
-      - "--config.file=/etc/prometheus/prometheus.yml"
-      - "--storage.tsdb.path=/prometheus"
-      - "--web.console.libraries=/etc/prometheus/console_libraries"
-      - "--web.console.templates=/etc/prometheus/consoles"
-      - "--storage.tsdb.retention.time=24h"
-      - "--web.enable-lifecycle"
-    networks:
-      - monitor
+  prod:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile_prod
+    container_name: microblog
+    environment:
+      DATABASE_URL: "mysql+pymysql://microblog:${MYSQL_PASSWORD}@dbserver/microblog"
+    depends_on:
+      - mysql
     ports:
-      - 9090:9090
+      - "8000:5000"
+    restart: "always"
 
-  grafana:
-    image: grafana/grafana:8.2.4
-    restart: unless-stopped
+  test:
+    image: erru17/microblog:test
+    container_name: microblog-test
     volumes:
-      - grafana-data:/var/lib/grafana
-    networks:
-      - monitor
-    ports:
-      - 3000:3000
+      - ./app:/home/microblog/app
+      - ./tests:/home/microblog/tests
+
+  # node-exporter:
+  #   image: prom/node-exporter:v1.2.2
+  #   container_name: node-exporter
+  #   restart: unless-stopped
+  #   volumes:
+  #     - /proc:/host/proc:ro
+  #     - /sys:/host/sys:ro
+  #     - /:/rootfs:ro
+  #   command:
+  #     - '--path.procfs=/host/proc'
+  #     - '--path.rootfs=/rootfs'
+  #     - '--path.sysfs=/host/sys'
+  #     - '--collector.filesystem.mount-points-exclude=^/(sys|proc|dev|host|etc)($$|/)'
+  #   ports:
+  #     - 9100:9100
+  #   networks:
+  #     - monitor
+
+  # prometheus:
+  #   image: prom/prometheus:v2.31.1
+  #   restart: unless-stopped
+  #   volumes:
+  #     - ./prometheus.yml:/etc/prometheus/prometheus.yml
+  #     - prometheus-data:/prometheus
+  #   command:
+  #     - "--config.file=/etc/prometheus/prometheus.yml"
+  #     - "--storage.tsdb.path=/prometheus"
+  #     - "--web.console.libraries=/etc/prometheus/console_libraries"
+  #     - "--web.console.templates=/etc/prometheus/consoles"
+  #     - "--storage.tsdb.retention.time=24h"
+  #     - "--web.enable-lifecycle"
+  #   networks:
+  #     - monitor
+  #   ports:
+  #     - 9090:9090
+
+  # grafana:
+  #   image: grafana/grafana:8.2.4
+  #   restart: unless-stopped
+  #   volumes:
+  #     - grafana-data:/var/lib/grafana
+  #   networks:
+  #     - monitor
+  #   ports:
+  #     - 3000:3000
 
