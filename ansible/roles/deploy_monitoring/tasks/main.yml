@@ -101,3 +101,15 @@
     path: /home/deploy/flaskdash.json
     overwrite: true
     state: present
+
+- name: Copy nginx dashboard
+  copy:
+    src: files/nginxdash.json
+    dest: /home/deploy/nginxdash.json
+
+- name: Import nginx dashboard - Nginx Total HTTP requests
+  grafana_dashboard:
+    url: http://0.0.0.0:3000
+    path: /home/deploy/nginxdash.json
+    overwrite: true
+    state: present

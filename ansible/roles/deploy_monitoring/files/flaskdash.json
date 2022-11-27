@@ -1,40 +1,4 @@
 {
-    "__inputs": [
-        {
-            "name": "DS_PROMETHEUS",
-            "label": "Prometheus",
-            "description": "",
-            "type": "datasource",
-            "pluginId": "prometheus",
-            "pluginName": "Prometheus"
-        }
-    ],
-    "__requires": [
-        {
-            "type": "grafana",
-            "id": "grafana",
-            "name": "Grafana",
-            "version": "6.0.2"
-        },
-        {
-            "type": "panel",
-            "id": "graph",
-            "name": "Graph",
-            "version": "5.0.0"
-        },
-        {
-            "type": "datasource",
-            "id": "prometheus",
-            "name": "Prometheus",
-            "version": "5.0.0"
-        },
-        {
-            "type": "panel",
-            "id": "singlestat",
-            "name": "Singlestat",
-            "version": "5.0.0"
-        }
-    ],
     "annotations": {
         "list": [
             {
@@ -44,16 +8,25 @@
                 "hide": true,
                 "iconColor": "rgba(0, 211, 255, 1)",
                 "name": "Annotations & Alerts",
+                "target": {
+                    "limit": 100,
+                    "matchAny": false,
+                    "tags": [],
+                    "type": "dashboard"
+                },
                 "type": "dashboard"
             }
         ]
     },
     "description": "Example dashboard for monitoring Flask webapps using prometheus_flask_exporter",
     "editable": true,
+    "fiscalYearStartMonth": 0,
     "gnetId": null,
     "graphTooltip": 0,
-    "id": 6,
+    "id": 2,
+    "iteration": 1669584878677,
     "links": [],
+    "liveNow": false,
     "panels": [
         {
             "aliasColors": {},
@@ -61,12 +34,6 @@
             "dashLength": 10,
             "dashes": false,
             "datasource": "${DS_PROMETHEUS}",
-            "fieldConfig": {
-                "defaults": {
-                    "custom": {}
-                },
-                "overrides": []
-            },
             "fill": 1,
             "fillGradient": 0,
             "gridPos": {
@@ -94,8 +61,11 @@
             "linewidth": 1,
             "links": [],
             "nullPointMode": "null",
+            "options": {
+                "alertThreshold": true
+            },
             "percentage": false,
-            "pluginVersion": "7.1.0",
+            "pluginVersion": "8.2.4",
             "pointradius": 5,
             "points": false,
             "renderer": "flot",
@@ -160,12 +130,6 @@
             "dashLength": 10,
             "dashes": false,
             "datasource": "${DS_PROMETHEUS}",
-            "fieldConfig": {
-                "defaults": {
-                    "custom": {}
-                },
-                "overrides": []
-            },
             "fill": 1,
             "fillGradient": 0,
             "gridPos": {
@@ -189,8 +153,11 @@
             "linewidth": 1,
             "links": [],
             "nullPointMode": "null",
+            "options": {
+                "alertThreshold": true
+            },
             "percentage": false,
-            "pluginVersion": "7.1.0",
+            "pluginVersion": "8.2.4",
             "pointradius": 5,
             "points": false,
             "renderer": "flot",
@@ -260,12 +227,6 @@
             "dashLength": 10,
             "dashes": false,
             "datasource": "${DS_PROMETHEUS}",
-            "fieldConfig": {
-                "defaults": {
-                    "custom": {}
-                },
-                "overrides": []
-            },
             "fill": 1,
             "fillGradient": 0,
             "gridPos": {
@@ -289,8 +250,11 @@
             "linewidth": 1,
             "links": [],
             "nullPointMode": "null",
+            "options": {
+                "alertThreshold": true
+            },
             "percentage": false,
-            "pluginVersion": "7.1.0",
+            "pluginVersion": "8.2.4",
             "pointradius": 5,
             "points": false,
             "renderer": "flot",
@@ -361,12 +325,6 @@
             "dashes": false,
             "datasource": "${DS_PROMETHEUS}",
             "decimals": null,
-            "fieldConfig": {
-                "defaults": {
-                    "custom": {}
-                },
-                "overrides": []
-            },
             "fill": 1,
             "fillGradient": 0,
             "gridPos": {
@@ -394,8 +352,11 @@
             "linewidth": 1,
             "links": [],
             "nullPointMode": "null",
+            "options": {
+                "alertThreshold": true
+            },
             "percentage": false,
-            "pluginVersion": "7.1.0",
+            "pluginVersion": "8.2.4",
             "pointradius": 5,
             "points": false,
             "renderer": "flot",
@@ -462,12 +423,6 @@
             "dashes": false,
             "datasource": "${DS_PROMETHEUS}",
             "description": "",
-            "fieldConfig": {
-                "defaults": {
-                    "custom": {}
-                },
-                "overrides": []
-            },
             "fill": 1,
             "fillGradient": 0,
             "gridPos": {
@@ -495,8 +450,11 @@
             "linewidth": 1,
             "links": [],
             "nullPointMode": "null",
+            "options": {
+                "alertThreshold": true
+            },
             "percentage": false,
-            "pluginVersion": "7.1.0",
+            "pluginVersion": "8.2.4",
             "pointradius": 5,
             "points": false,
             "renderer": "flot",
@@ -561,12 +519,6 @@
             "dashLength": 10,
             "dashes": false,
             "datasource": "${DS_PROMETHEUS}",
-            "fieldConfig": {
-                "defaults": {
-                    "custom": {}
-                },
-                "overrides": []
-            },
             "fill": 1,
             "fillGradient": 0,
             "gridPos": {
@@ -594,8 +546,11 @@
             "linewidth": 1,
             "links": [],
             "nullPointMode": "null",
+            "options": {
+                "alertThreshold": true
+            },
             "percentage": false,
-            "pluginVersion": "7.1.0",
+            "pluginVersion": "8.2.4",
             "pointradius": 5,
             "points": false,
             "renderer": "flot",
@@ -662,12 +617,6 @@
             "dashLength": 10,
             "dashes": false,
             "datasource": "${DS_PROMETHEUS}",
-            "fieldConfig": {
-                "defaults": {
-                    "custom": {}
-                },
-                "overrides": []
-            },
             "fill": 1,
             "fillGradient": 0,
             "gridPos": {
@@ -695,8 +644,11 @@
             "linewidth": 1,
             "links": [],
             "nullPointMode": "null",
+            "options": {
+                "alertThreshold": true
+            },
             "percentage": false,
-            "pluginVersion": "7.1.0",
+            "pluginVersion": "8.2.4",
             "pointradius": 5,
             "points": false,
             "renderer": "flot",
@@ -757,11 +709,32 @@
         }
     ],
     "refresh": "5s",
-    "schemaVersion": 26,
+    "schemaVersion": 32,
     "style": "dark",
     "tags": [],
     "templating": {
-        "list": []
+        "list": [
+            {
+                "current": {
+                    "selected": false,
+                    "text": "prometheus",
+                    "value": "prometheus"
+                },
+                "description": null,
+                "error": null,
+                "hide": 0,
+                "includeAll": false,
+                "label": null,
+                "multi": false,
+                "name": "DS_PROMETHEUS",
+                "options": [],
+                "query": "prometheus",
+                "refresh": 1,
+                "regex": "",
+                "skipUrlSync": false,
+                "type": "datasource"
+            }
+        ]
     },
     "time": {
         "from": "now-5m",
@@ -784,5 +757,5 @@
     "timezone": "",
     "title": "Prometheus Flask exporter example dashboard",
     "uid": "_eX4mpl3",
-    "version": 2
+    "version": 3
 }
