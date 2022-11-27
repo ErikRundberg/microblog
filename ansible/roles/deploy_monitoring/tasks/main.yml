@@ -61,6 +61,11 @@
     ports:
       - "9090:9090"
 
+- name: Add grafana config
+  template:
+    src: grafana.ini.j2
+    dest: /home/deploy/grafana.ini
+
 - name: Start grafana
   docker_container:
     name: grafana
@@ -69,6 +74,7 @@
     restart: true
     volumes:
       - grafana-data:/var/lib/grafana
+      - /home/deploy/grafana.ini:/etc/grafana/grafana.ini
     networks:
       - name: monitor
     ports:

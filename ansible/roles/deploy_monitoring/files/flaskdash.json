@@ -755,7 +755,7 @@
         ]
     },
     "timezone": "",
-    "title": "Prometheus Flask exporter example dashboard",
+    "title": "Prometheus Flask",
     "uid": "_eX4mpl3",
     "version": 3
 }
