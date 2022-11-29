@@ -4,9 +4,9 @@ on:
     secrets:
       SNYK_TOKEN:
         required: true
-      DOCKERHUB_USERNAME:
+      DOCKER_USERNAME:
         required: true
-      DOCKERHUB_PASSWORD:
+      DOCKER_PASSWORD:
         required: true
   workflow_dispatch:
   push:
@@ -15,8 +15,8 @@ jobs:
   publish-image:
     uses: ./.github/workflows/publish_docker.yml
     secrets:
-      DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
-      DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
+      DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+      DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
   security:
     needs: publish-image
     runs-on: ubuntu-latest
