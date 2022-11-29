@@ -230,3 +230,8 @@ install-deploy:
 .PHONY: bandit
 bandit:
 	bandit -r app
+
+# target: zap							- Run zap against loadbalancer
+.PHONY: zap
+zap:
+	docker run -t owasp/zap2docker-weekly zap-baseline.py -t https://rundberg.me
