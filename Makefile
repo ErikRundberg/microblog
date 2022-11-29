@@ -161,6 +161,7 @@ exec-tests: test-unit test-integration
 .PHONY: test
 test: validate exec-tests
 	${py} -m coverage report  --rcfile=.coveragerc
+	$(MAKE) bandit
 	$(MAKE) clean-cov
 
 
@@ -219,8 +220,13 @@ install-test:
 
 
 
-# target: install-deploy                 - Install all Python packages specified in requirements/{deploy.txt} and ansible galaxy collections in ansible/requirements.yml
+# target: install-deploy                - Install all Python packages specified in requirements/{deploy.txt} and ansible galaxy collections in ansible/requirements.yml
 .PHONY: install-deploy
 install-deploy:
 	${pip} install -r requirements/deploy.txt
 	cd ansible && ansible-galaxy install -r requirements.yml
+
+# target: bandit						- Run bandit on app folder
+.PHONY: bandit
+bandit:
+	bandit -r app
