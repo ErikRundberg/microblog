@@ -14,7 +14,9 @@ on:
 jobs:
   publish-image:
     uses: ./.github/workflows/publish_docker.yml
-    secrets: inherit
+    secrets:
+      DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+      DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
   security:
     needs: publish-image
     runs-on: ubuntu-latest
