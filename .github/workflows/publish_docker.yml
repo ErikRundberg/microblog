@@ -1,6 +1,11 @@
 name: Publish to Docker
 on:
   workflow_call:
+    secrets:
+      DOCKERHUB_USERNAME:
+        required: true
+      DOCKERHUB_PASSWORD:
+        required: true
   workflow_dispatch:
   push:
     branches: [master]
