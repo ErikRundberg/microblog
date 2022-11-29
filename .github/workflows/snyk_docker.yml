@@ -14,6 +14,7 @@ on:
 jobs:
   publish-image:
     uses: ./.github/workflows/publish_docker.yml
+    secrets: inherit
   security:
     needs: publish-image
     runs-on: ubuntu-latest
