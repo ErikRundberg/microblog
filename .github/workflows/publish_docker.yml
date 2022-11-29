@@ -2,6 +2,8 @@ name: Publish to Docker
 on:
   workflow_call:
   workflow_dispatch:
+  push:
+    branches: [master]
 
 jobs:
   test-and-validate:
