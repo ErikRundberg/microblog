@@ -13,7 +13,6 @@ on:
 jobs:
   test-and-validate:
     uses: ./.github/workflows/tests.yml
-    secrets: inherit
 
   push_to_docker:
     needs: test-and-validate
