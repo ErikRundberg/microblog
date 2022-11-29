@@ -1,4 +1,4 @@
-name: Dependency check using Snyk
+name: Snyk-check
 on: push
 jobs:
   security:
@@ -6,7 +6,7 @@ jobs:
     steps:
       - uses: actions/checkout@master
       - name: Run Snyk to check for vulnerabilities
-        uses: snyk/actions/python-3.6@master
+        uses: snyk/actions/python-3.8@master
         continue-on-error: true # To make sure that SARIF upload gets called
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
