@@ -4,6 +4,10 @@ on:
     secrets:
       SNYK_TOKEN:
         required: true
+      DOCKERHUB_USERNAME:
+        required: true
+      DOCKERHUB_PASSWORD:
+        required: true
   workflow_dispatch:
   push:
     branches: [master]
