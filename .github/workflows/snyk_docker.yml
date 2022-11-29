@@ -1,9 +1,6 @@
 name: Check Docker using Snyk 
 on:
-  workflow_dispatch:
-  workflow_run:
-    workflows: ["Publish to Docker"]
-    types: completed
+  workflow_call:
 jobs:
   publish-image:
     uses: ./.github/workflows/publish_docker.yml
