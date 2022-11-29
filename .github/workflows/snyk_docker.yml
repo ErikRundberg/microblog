@@ -1,12 +1,14 @@
 name: Check Docker using Snyk 
 on:
   workflow_dispatch:
-  push: 
-    branches: [master]
-  pull_request:
-    branches: [master]
+  workflow_run:
+    workflows: ["Publish to Docker"]
+    types: completed
 jobs:
+  publish-image:
+    uses: ./.github/workflows/publish_docker.yml
   security:
+    needs: publish-image
     runs-on: ubuntu-latest
     steps:
     - name: Run Snyk to check Docker image for vulnerabilities
