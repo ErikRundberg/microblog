@@ -3,11 +3,13 @@ name: Publish to Docker
 on:
   workflow_run:
     workflows: ["Test and Validate"]
-    types:
-      - completed
 
 jobs:
+  test-and-validate:
+    uses: ./.github/workflows/tests.yml
+
   push_to_docker:
+    needs: test-and-validate
     name: Push Docker image to Docker Hug
     runs-on: ubuntu-latest
     steps:
