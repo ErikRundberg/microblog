@@ -9,4 +9,4 @@ jobs:
       env:
         SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
       with:
-        image: docker/Dockerfile_prod
+        image: erru17/microblog:latest
