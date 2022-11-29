@@ -2,9 +2,9 @@ name: Check Python using Snyk
 on:
   workflow_dispatch:
   push: 
-    branches: [main]
+    branches: [master]
   pull_request:
-    branches: [main]
+    branches: [master]
 jobs:     
   snyk-analysis:
     runs-on: ubuntu-latest
