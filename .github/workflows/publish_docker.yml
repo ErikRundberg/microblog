@@ -1,8 +1,6 @@
 name: Publish to Docker
 on:
-  workflow_run:
-    workflows: ["Test and Validate"]
-    types: completed
+  workflow_call:
 
 jobs:
   test-and-validate:
