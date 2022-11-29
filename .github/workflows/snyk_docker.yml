@@ -1,6 +1,9 @@
 name: Check Docker using Snyk 
 on:
   workflow_call:
+    secrets:
+      SNYK_TOKEN:
+        required: true
   workflow_dispatch:
   push:
     branches: [master]
