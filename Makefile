@@ -78,8 +78,7 @@ help:
 # target: add-ssh                         - Add ssh key to agent
 .PHONY: add-ssh
 add-ssh:
-	eval `ssh-agent -s`
-	ssh-add ~/.ssh/azure
+	eval `ssh-agent -s`; ssh-add ~/.ssh/azure
 
 
 
