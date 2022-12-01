@@ -1,8 +1,11 @@
 Microblog
 ===================
 
-![Tests workflow](https://github.com/ErikRundberg/microblog/actions/workflows/tests.yml/badge.svg)
-![Tests workflow](https://github.com/ErikRundberg/microblog/actions/workflows/publish_docker.yml/badge.svg)
+![Test and Validate](https://github.com/ErikRundberg/microblog/actions/workflows/tests.yml/badge.svg)
+![Publish to Docker](https://github.com/ErikRundberg/microblog/actions/workflows/publish_docker.yml/badge.svg)
+
+![Check Docker using Snyk](https://github.com/ErikRundberg/microblog/actions/workflows/snyk_docker.yml/badge.svg)
+![Check Python using Snyk](https://github.com/ErikRundberg/microblog/actions/workflows/snyk_python.yml/badge.svg)
 
 Course material for a devops course, aimed at a Swedish course in computer science on University level new to devops. The students are to further develop this application and integreate it with new tools.
 
